@@ -39,5 +39,5 @@ jobs:
             linux/amd64
           push: true
           tags: |
-            ${{ github.repository }}:latest
-            ${{ github.repository }}:${{ env.APP_VERSION }}
+            xkrfer/toonflow-app:latest
+            xkrfer/toonflow-app:${{ env.APP_VERSION }}
