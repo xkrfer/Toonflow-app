@@ -27,7 +27,8 @@ RUN yarn install --frozen-lockfile
 # 复制源码
 COPY tsconfig.json ./
 COPY src/ ./src/
-COPY --from=builder-web /app/Toonflow-web/dist ./scripts/web
+# COPY --from=builder-web /app/Toonflow-web/dist ./scripts/web
+COPY scripts/ ./scripts/
 
 RUN yarn build
 
@@ -49,7 +50,7 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/yarn.lock ./
 
 # 复制静态页面到 nginx 目录
-COPY --from=builder /app/scripts/web /usr/share/nginx/html
+COPY --from=builder-web /app/Toonflow-web/dist /usr/share/nginx/html
 
 # 只安装生产依赖
 RUN yarn install --frozen-lockfile --production
