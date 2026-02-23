@@ -1,4 +1,17 @@
 # 本地构建阶段 - 使用本地源码，不从 git 克隆
+FROM node:24-alpine AS builder-web
+
+WORKDIR /app
+
+RUN npm config set registry https://registry.npmmirror.com/ && \
+    yarn config set registry https://registry.npmmirror.com/ && \
+    apk add --no-cache git && \
+    git clone https://github.com/xkrfer/Toonflow-web.git && \
+    cd Toonflow-web && \
+    yarn install && \
+    yarn build
+
+# 本地构建阶段 - 使用本地源码，不从 git 克隆
 FROM node:24-alpine AS builder
 
 WORKDIR /app
@@ -14,7 +27,7 @@ RUN yarn install --frozen-lockfile
 # 复制源码
 COPY tsconfig.json ./
 COPY src/ ./src/
-COPY scripts/ ./scripts/
+COPY --from=builder-web /app/Toonflow-web/dist ./scripts/web
 
 RUN yarn build
 
