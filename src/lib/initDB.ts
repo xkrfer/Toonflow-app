@@ -18,7 +18,7 @@ export default async (knex: Knex, forceInit: boolean = false): Promise<void> => 
         table.unique(["id"]);
       },
       initData: async (knex) => {
-        await knex("t_user").insert([{ id: 1, name: "admin", password: "admin123" }]);
+        await knex("t_user").insert([{ id: 1, name: "admin", password: "admin@123.com" }]);
       },
     },
     {
@@ -205,7 +205,7 @@ export default async (knex: Knex, forceInit: boolean = false): Promise<void> => 
         table.primary(["id"]);
         table.unique(["id"]);
       },
-      initData: async (knex) => {},
+      initData: async (knex) => { },
     },
     {
       name: "t_videoConfig",
