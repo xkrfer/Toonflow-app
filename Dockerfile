@@ -9,7 +9,7 @@ RUN npm config set registry https://registry.npmmirror.com/ && \
     git clone https://github.com/xkrfer/Toonflow-web.git && \
     cd Toonflow-web && \
     yarn install && \
-    yarn build
+    yarn run build:prod
 
 # 本地构建阶段 - 使用本地源码，不从 git 克隆
 FROM node:24-alpine AS builder
